@@ -47,7 +47,7 @@ function addGraphData(digraph, data, field) {
                     colors.used[nLabels] = color;
                 }
                 data.nodes[id]=field;
-                var n = digraph.addNode(id, {label:nLabels + "|" + name(field)}); // merge({lblString:field.labels},field.properties));
+                var n = digraph.addNode(id, {label:nLabels + "|" + name(field), weight:field.properties.weight}); // merge({lblString:field.labels},field.properties));
                 n.set( "style", "filled" );
                 n.set( "shape", "Mrecord" );
                 n.set( "fillcolor", color );
@@ -60,7 +60,7 @@ function addGraphData(digraph, data, field) {
             if (!(id in data.rels)) {
                 data.rels[id]=field;
 //              console.log("addEdge",getId(field.start), getId(field.end))
-                var e = digraph.addEdge(getId(field.start), getId(field.end),{label:field.type}); // , merge({type:field["type"]}, field.properties));
+                var e = digraph.addEdge(getId(field.start), getId(field.end),{label:field.type, weight:field.properties.weight}); // , merge({type:field["type"]}, field.properties));
                 e.set( "color", "#00 00 00 40" );
                 e.set("fontname","Helvetica");
                 return e;
@@ -108,7 +108,7 @@ function renderGraph(url, user, password, database, query, renderer, file, callb
         var data = { nodes: {}, rels: {} }
         // Create digraph G
         // docs: https://graphviz.org/docs/attrs/K/
-        var g = graphviz.digraph("G");
+        var g = graphviz.graph("G");
         g.set("overlap",false);
         g.set("concentrate",true);
         g.set("K",0.5);
