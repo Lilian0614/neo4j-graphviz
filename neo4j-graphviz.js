@@ -1,5 +1,5 @@
 const GRAPHVIZ = process.env.GRAPHVIZ || "/usr/local/bin";
-var neo4j = require('neo4j-driver');
+var neo4j = require('neo4j-driver/lib/browser/neo4j-web');
 var graphviz = require('graphviz');
 // colors from: http://flatuicolors.com/
 var colors = {all:["#2ecc71","#1abc9c","#3498db","#9b59b6","#34495e","#16a085","#f1c40f","#e67e22",
